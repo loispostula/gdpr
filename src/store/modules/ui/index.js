@@ -4,6 +4,9 @@ import mutations from './mutations';
 
 const state = {
   menu_visible: false,
+  dialogs: {
+    consent: false,
+  },
 };
 
 export default {

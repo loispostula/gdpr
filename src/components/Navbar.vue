@@ -2,7 +2,7 @@
   <div class="navbar-drawer">
     <md-list>
       <md-subheader>General</md-subheader>
-      <md-list-item>
+      <md-list-item v-on:click="displayConsentDialog">
         <md-icon>tune</md-icon>
         <span class="md-list-item-text">Review consent</span>
       </md-list-item>
@@ -39,8 +39,15 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex';
+
+const uiHelper = createNamespacedHelpers('ui');
+
 export default {
   name: 'navbar',
+  methods: uiHelper.mapActions([
+    'displayConsentDialog',
+  ]),
 };
 </script>
 

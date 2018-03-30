@@ -12,6 +12,7 @@
       </md-app-drawer>
       <md-app-content>
         <router-view/>
+        <consent-review v-if="consent_review_visible"/>
       </md-app-content>
     </md-app>
   </div>
@@ -20,6 +21,7 @@
 <script>
 import { createNamespacedHelpers } from 'vuex';
 import Navbar from './components/Navbar';
+import ConsentReview from './components/ConsentReview';
 
 const uiHelper = createNamespacedHelpers('ui');
 
@@ -28,9 +30,11 @@ export default {
   name: 'App',
   components: {
     Navbar,
+    ConsentReview,
   },
   computed: uiHelper.mapGetters({
     menu_visible: 'isMenuVisible',
+    consent_review_visible: 'isConsentDialogVisible',
   }),
   methods: uiHelper.mapActions([
     'toggleMenu',
