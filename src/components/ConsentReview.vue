@@ -2,18 +2,28 @@
   <div>
     <md-dialog v-bind:md-active="true">
       <md-dialog-title>Consent given to GDPR</md-dialog-title>
-      <md-list>
-        <md-list-item v-for="consent in consents" v-bind:key="consent.title">
-          <div class="md-list-item-text">
-            <span> {{ consent.title}} </span>
-            <span> {{ consent.description }}</span>
-          </div>
-          <md-switch
-            v-on:change="toggleConsent(consent)"
-            v-bind:value="!consent.given"
-          />
-        </md-list-item>
-      </md-list>
+      <md-card v-for="consent in consents" v-bind:key="consent.title">
+        <div class="md-card-header">
+          <div class="md-title"> {{ consent.title}} </div>
+        </div>
+        <md-card-content>
+          {{ consent.description }}
+        </md-card-content>
+        <md-card-actions>
+          <md-button
+            v-on:click="toggleConsent(consent)"
+            v-bind:class="{'md-primary': !consent.given, 'md-accent': consent.given}">
+            <span v-if="consent.given">Remove consent</span>
+            <span v-else>Give consent</span>
+          </md-button>
+        </md-card-actions>
+
+        <!--<md-switch-->
+          <!--class="md-list-action"-->
+          <!--v-on:change="toggleConsent(consent)"-->
+          <!--v-bind:value="!consent.given"-->
+        <!--/>-->
+      </md-card>
       <md-dialog-actions>
         <md-button class="md-primary" v-on:click="hideConsentDialog">Close</md-button>
       </md-dialog-actions>
@@ -63,5 +73,7 @@ export default {
 </script>
 
 <style scoped>
-
+.md-card {
+  margin: 10px 0;
+}
 </style>
