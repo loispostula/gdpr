@@ -1,14 +1,24 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Counter from '../components/Counter';
+
+import RequestList from '../components/RequestList';
+import CompanyList from '../components/CompanyList';
 
 Vue.use(Router);
 
 const routes = [
   {
     path: '/',
-    name: 'Counter',
-    component: Counter,
+  },
+  {
+    path: '/requests',
+    name: 'RequestList',
+    component: RequestList,
+  },
+  {
+    path: '/companies',
+    name: 'CompanyList',
+    component: CompanyList,
   },
 ];
 

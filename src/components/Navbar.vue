@@ -15,11 +15,11 @@
         <span class="md-list-item-text">Involved third parties</span>
       </md-list-item>
       <md-subheader>Requests</md-subheader>
-      <md-list-item>
+      <md-list-item to="/requests">
         <md-icon>format_list_bulleted</md-icon>
         <span class="md-list-item-text">My requests</span>
       </md-list-item>
-      <md-list-item>
+      <md-list-item to="/companies">
         <md-icon>account_balance</md-icon>
         <span class="md-list-item-text">Companies</span>
       </md-list-item>
