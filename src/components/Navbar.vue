@@ -6,7 +6,7 @@
         <md-icon>tune</md-icon>
         <span class="md-list-item-text">Review consent</span>
       </md-list-item>
-      <md-list-item>
+      <md-list-item v-on:click="displayPrivacyPolicyDialog">
         <md-icon>vpn_key</md-icon>
         <span class="md-list-item-text">Privacy policy</span>
       </md-list-item>
@@ -47,6 +47,7 @@ export default {
   name: 'navbar',
   methods: uiHelper.mapActions([
     'displayConsentDialog',
+    'displayPrivacyPolicyDialog',
   ]),
 };
 </script>

@@ -6,6 +6,7 @@ const state = {
   menu_visible: false,
   dialogs: {
     consent: false,
+    privacy_policy: false,
   },
 };
 

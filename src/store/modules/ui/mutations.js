@@ -10,4 +10,10 @@ export default {
   [types.HIDE_CONSENT_DIALOG](state) {
     state.dialogs.consent = false;
   },
+  [types.DISPLAY_PRIVACY_POLICY_DIALOG](state) {
+    state.dialogs.privacy_policy = true;
+  },
+  [types.HIDE_PRIVACY_POLICY_DIALOG](state) {
+    state.dialogs.privacy_policy = false;
+  },
 };

@@ -13,6 +13,7 @@
       <md-app-content>
         <router-view/>
         <consent-review v-if="consent_review_visible"/>
+        <privacy-policy v-if="privacy_policy_visible" />
       </md-app-content>
     </md-app>
   </div>
@@ -22,19 +23,21 @@
 import { createNamespacedHelpers } from 'vuex';
 import Navbar from './components/Navbar';
 import ConsentReview from './components/ConsentReview';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 const uiHelper = createNamespacedHelpers('ui');
-
 
 export default {
   name: 'App',
   components: {
     Navbar,
+    PrivacyPolicy,
     ConsentReview,
   },
   computed: uiHelper.mapGetters({
     menu_visible: 'isMenuVisible',
     consent_review_visible: 'isConsentDialogVisible',
+    privacy_policy_visible: 'isPrivacyPolicyDialogVisible',
   }),
   methods: uiHelper.mapActions([
     'toggleMenu',
