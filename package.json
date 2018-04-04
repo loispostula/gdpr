@@ -14,9 +14,14 @@
     "deploy": "npm run build; push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv-webpack": "^1.5.5",
+    "jwt-decode": "^2.2.0",
     "vue": "^2.5.2",
+    "vue-axios": "^2.1.1",
     "vue-material": "^1.0.0-beta-8",
     "vue-router": "^3.0.1",
+    "vuelidate": "^0.6.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

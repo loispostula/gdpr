@@ -8,6 +8,13 @@ const state = {
     consent: false,
     privacy_policy: false,
   },
+  authentication: {
+    jwt: localStorage.getItem('t'),
+    endpoints: {
+      obtainJWT: process.env.JWT_OBTAIN,
+      refreshJWT: process.env.JWT_REFRESH,
+    },
+  },
 };
 
 export default {

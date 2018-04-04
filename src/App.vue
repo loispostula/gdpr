@@ -41,7 +41,14 @@ export default {
   }),
   methods: uiHelper.mapActions([
     'toggleMenu',
+    'inspectToken',
   ]),
+  mounted() {
+    this.inspectToken();
+  },
+  updated() {
+    this.inspectToken();
+  },
 };
 </script>
 

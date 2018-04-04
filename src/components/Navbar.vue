@@ -26,13 +26,25 @@
     </md-list>
     <md-list>
       <md-subheader>Settings</md-subheader>
-      <md-list-item>
+      <md-list-item v-if="is_authenticated">
         <md-icon>perm_identity</md-icon>
         <span class="md-list-item-text">My account</span>
       </md-list-item>
-      <md-list-item>
+      <md-list-item v-if="is_authenticated">
         <md-icon>settings</md-icon>
         <span class="md-list-item-text">Settings</span>
+      </md-list-item>
+      <md-list-item v-if="is_authenticated" v-on:click="logout">
+        <md-icon>power_settings_new</md-icon>
+        <span class="md-list-item-text">Logout</span>
+      </md-list-item>
+      <md-list-item v-if="!is_authenticated" to="login">
+        <md-icon>person</md-icon>
+        <span class="md-list-item-text">Login</span>
+      </md-list-item>
+      <md-list-item v-if="!is_authenticated">
+        <md-icon>person_add</md-icon>
+        <span class="md-list-item-text">Register</span>
       </md-list-item>
     </md-list>
   </div>
@@ -45,9 +57,14 @@ const uiHelper = createNamespacedHelpers('ui');
 
 export default {
   name: 'navbar',
+  computed: uiHelper.mapGetters({
+    is_authenticated: 'isAuthenticated',
+  }),
   methods: uiHelper.mapActions([
     'displayConsentDialog',
     'displayPrivacyPolicyDialog',
+    'logout',
+    'toggleMenu',
   ]),
 };
 </script>

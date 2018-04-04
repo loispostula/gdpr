@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     'gdpr.apps.SuitConfig',
     'django.contrib.admin',
     'rest_framework',
+    'corsheaders',
     'company',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -139,3 +141,8 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
+
+# CORS
+CORS_ORIGIN_WHITELIST = [
+    'localhost:8080',
+]

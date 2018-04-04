@@ -16,4 +16,10 @@ export default {
   [types.HIDE_PRIVACY_POLICY_DIALOG](state) {
     state.dialogs.privacy_policy = false;
   },
+  [types.SET_TOKEN](state, newToken) {
+    state.authentication.jwt = newToken;
+  },
+  [types.REMOVE_TOKEN](state) {
+    state.authentication.jwt = null;
+  },
 };

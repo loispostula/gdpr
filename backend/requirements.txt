@@ -3,3 +3,4 @@ djangorestframework
 djangorestframework_jwt
 psycopg2-binary
 -e git://github.com/darklow/django-suit.git@v2#egg=django-suit
+django-cors-headers
