@@ -29,9 +29,15 @@
       </md-table-empty-state>
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="Request" md-sort-by="request">{{ item.request }}</md-table-cell>
-        <md-table-cell md-label="Company" md-sort-by="company">{{ item.company }}</md-table-cell>
-        <md-table-cell md-label="Status" md-sort-by="status">{{ item.status }}</md-table-cell>
+        <md-table-cell md-label="Request" md-sort-by="request">
+          {{ item.request }}
+        </md-table-cell>
+        <md-table-cell md-label="Company" md-sort-by="company">
+          {{ companies[item.company] && companies[item.company].name }}
+        </md-table-cell>
+        <md-table-cell md-label="Status" md-sort-by="status">
+          {{ item.status }}
+        </md-table-cell>
       </md-table-row>
     </md-table>
 </template>
@@ -40,6 +46,7 @@
 import { createNamespacedHelpers } from 'vuex';
 
 const requestsHelper = createNamespacedHelpers('requests');
+const companiesHelper = createNamespacedHelpers('companies');
 
 export default {
   name: 'request-list',
@@ -49,6 +56,9 @@ export default {
       search_text: 'getSearchText',
       ordering_key: 'getOrderingKey',
       ordering_direction: 'getOrderingDirection',
+    }),
+    ...companiesHelper.mapGetters({
+      companies: 'getAllCompanies',
     }),
     empty_description() {
       // if there is some requests, no need to do anything

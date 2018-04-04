@@ -64,31 +64,31 @@
           </md-card-header>
 
           <md-card-actions md-alignment="space-between">
-            <md-card-media md-medium="true" md-ratio="1/1">
+            <md-card-media md-medium md-ratio="1/1">
               <img v-bind:src="company.logo" alt="People">
             </md-card-media>
             <md-card-actions class="action-holder">
               <div class="button-holder"
               >
-                <md-button>
+                <md-button v-on:click="() => requestDataOverview(company)">
                   Get data
                 </md-button>
               </div>
               <div class="button-holder"
               >
-                <md-button>
+                <md-button v-on:click="() => requestDeleteData(company)">
                   Delete data
                 </md-button>
               </div>
               <div class="button-holder"
               >
-                <md-button>
+                <md-button v-on:click="() => requestRemoveConsent(company)">
                   Remove consent
                 </md-button>
               </div>
               <div class="button-holder"
               >
-                <md-button>
+                <md-button v-on:click="() => requestUpdateInfo(company)">
                   Update data
                 </md-button>
               </div>
@@ -119,6 +119,10 @@ export default {
       'setSearchText',
       'setOrderingKey',
       'setOrderingDirection',
+      'requestDataOverview',
+      'requestDeleteData',
+      'requestRemoveConsent',
+      'requestUpdateInfo',
     ]),
   },
   created() {

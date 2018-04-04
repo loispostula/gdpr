@@ -1,23 +1,29 @@
 import types from './types';
-import getters from './getters';
 
 const toLower = str => str.toString().toLowerCase();
 
-const filterRequests = ({ commit, state }) => {
-  const requests = getters.getAllRequestsAsList(state);
+const filterRequests = ({ commit, getters, rootGetters }) => {
+  const requests = getters.getAllRequestsAsList;
   // first we filter
-  const searchText = getters.getSearchText(state);
+  const searchText = toLower(getters.getSearchText);
+  const companies = rootGetters['companies/getAllCompanies'];
   const cands = [];
   for (const request of requests) {
-    for (const key of ['company', 'status', 'request']) {
-      if (toLower(request[key]).includes(toLower(searchText))) {
+    for (const key of ['status', 'request']) {
+      if (toLower(request[key]).includes(searchText)) {
         cands.push(request);
         break;
       }
     }
+    const company = companies[request.company];
+    if (company) {
+      if (toLower(company.name).includes(searchText)) {
+        cands.push(request);
+      }
+    }
   }
-  const orderingKey = getters.getOrderingKey(state);
-  const orderingDirection = getters.getOrderingDirection(state);
+  const orderingKey = getters.getOrderingKey;
+  const orderingDirection = getters.getOrderingDirection;
   cands.sort((a, b) => {
     const sa = toLower(a[orderingKey]);
     const sb = toLower(b[orderingKey]);
@@ -27,25 +33,29 @@ const filterRequests = ({ commit, state }) => {
   commit(types.FILTER_REQUESTS, cands.map(c => c.id));
 };
 
-const setSearchText = ({ commit, dispatch, state }, payload) => {
-  const searchText = getters.getSearchText(state);
+const setSearchText = ({ commit, dispatch, getters }, payload) => {
+  const searchText = getters.getSearchText;
   if (searchText === payload) return;
   commit(types.SET_SEARCH_TEXT, payload);
   dispatch('filterRequests');
 };
 
-const setOrderingKey = ({ commit, dispatch, state }, payload) => {
-  const orderingKey = getters.getOrderingKey(state);
+const setOrderingKey = ({ commit, dispatch, getters }, payload) => {
+  const orderingKey = getters.getOrderingKey;
   if (orderingKey === payload) return;
   commit(types.SET_ORDERING_KEY, payload);
   dispatch('filterRequests');
 };
 
-const setOrderingDirection = ({ commit, dispatch, state }, payload) => {
-  const orderingDirection = getters.getOrderingDirection(state);
+const setOrderingDirection = ({ commit, dispatch, getters }, payload) => {
+  const orderingDirection = getters.getOrderingDirection;
   if (orderingDirection === payload) return;
   commit(types.SET_ORDERING_DIRECTION, payload);
   dispatch('filterRequests');
+};
+
+const makeRequest = ({ commit }, payload) => {
+  commit(types.CREATE_REQUEST_COMPLETE, payload);
 };
 
 export default {
@@ -53,4 +63,5 @@ export default {
   filterRequests,
   setOrderingKey,
   setOrderingDirection,
+  makeRequest,
 };

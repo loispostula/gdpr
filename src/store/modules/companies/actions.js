@@ -48,20 +48,40 @@ const setOrderingDirection = ({ commit, dispatch, state }, payload) => {
   dispatch('filterCompanies');
 };
 
-const requestDataOverview = ({ commit }, payload) => {
+const requestDataOverview = ({ commit, dispatch }, payload) => {
   commit(types.REQUEST_DATA_OVERVIEW, payload);
+  dispatch(
+    'requests/makeRequest',
+    { company: payload, request: 'data_overview' },
+    { root: true },
+  );
 };
 
-const requestDeleteData = ({ commit }, payload) => {
+const requestDeleteData = ({ commit, dispatch }, payload) => {
   commit(types.REQUEST_DELETE_DATA, payload);
+  dispatch(
+    'requests/makeRequest',
+    { company: payload, request: 'delete_data' },
+    { root: true },
+  );
 };
 
-const requestRemoveConsent = ({ commit }, payload) => {
+const requestRemoveConsent = ({ commit, dispatch }, payload) => {
   commit(types.REQUEST_REMOVE_CONSENT, payload);
+  dispatch(
+    'requests/makeRequest',
+    { company: payload, request: 'remove_consent' },
+    { root: true },
+  );
 };
 
-const requestUpdateInfo = ({ commit }, payload) => {
+const requestUpdateInfo = ({ commit, dispatch }, payload) => {
   commit(types.REQUEST_UPDATE, payload);
+  dispatch(
+    'requests/makeRequest',
+    { company: payload, request: 'update_info' },
+    { root: true },
+  );
 };
 
 export default {

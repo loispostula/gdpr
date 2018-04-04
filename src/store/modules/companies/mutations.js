@@ -13,4 +13,16 @@ export default {
   [types.SET_ORDERING_DIRECTION](state, payload) {
     state.table_control.ordering_direction = payload;
   },
+  [types.REQUEST_DATA_OVERVIEW](state, payload) {
+    state.data[payload.id].request_sent += 1;
+  },
+  [types.REQUEST_DELETE_DATA](state, payload) {
+    state.data[payload.id].request_sent += 1;
+  },
+  [types.REQUEST_REMOVE_CONSENT](state, payload) {
+    state.data[payload.id].request_sent += 1;
+  },
+  [types.REQUEST_UPDATE](state, payload) {
+    state.data[payload.id].request_sent += 1;
+  },
 };

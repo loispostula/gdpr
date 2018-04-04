@@ -57,6 +57,7 @@ module.exports = {
         message: '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
       },
     ],
+    'no-prototype-builtins': "off",
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
