@@ -5,6 +5,7 @@ import createLogger from 'vuex/dist/logger';
 import ui from './modules/ui';
 import consents from './modules/consents';
 import requests from './modules/requests';
+import companies from './modules/companies';
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     ui,
     consents,
     requests,
+    companies,
   },
   strict: debug,
   plugins: [logger],
