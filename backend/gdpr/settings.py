@@ -38,14 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gdpr.apps.SuitConfig',
     'django.contrib.admin',
+    'django_extensions',
+    'debug_toolbar',
     'rest_framework',
     'corsheaders',
+    'base',
     'company',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -144,6 +148,41 @@ JWT_AUTH = {
 CORS_ORIGIN_WHITELIST = [
     'localhost:8080',
 ]
+
+# Custom user setting
+# We want to store as little information as possible on the user
+# So we remove all fields except for the email and password
+AUTH_USER_MODEL = 'base.User'
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s.%(levelname)s %(name)s: %(message)s'
+        },
+    },
+    'handlers': {
+        'default': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['default'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['default'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    }
+}
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
