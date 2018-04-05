@@ -4,6 +4,9 @@ export default {
   [types.TOGGLE_MENU](state) {
     state.menu_visible = !state.menu_visible;
   },
+  [types.SET_MENU_VISIBILITY](state, visibility) {
+    state.menu_visible = visibility;
+  },
   [types.DISPLAY_CONSENT_DIALOG](state) {
     state.dialogs.consent = true;
   },

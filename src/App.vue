@@ -7,7 +7,7 @@
         </md-button>
         <span class="md-title">GDPR</span>
       </md-app-toolbar>
-      <md-app-drawer v-on:update:mdActive="toggleMenu" :md-active="menu_visible">
+      <md-app-drawer v-on:update:mdActive="toggleMenu" :md-active.sync="menu_visible">
         <navbar />
       </md-app-drawer>
       <md-app-content>
@@ -34,11 +34,20 @@ export default {
     PrivacyPolicy,
     ConsentReview,
   },
-  computed: uiHelper.mapGetters({
-    menu_visible: 'isMenuVisible',
-    consent_review_visible: 'isConsentDialogVisible',
-    privacy_policy_visible: 'isPrivacyPolicyDialogVisible',
-  }),
+  computed: {
+    ...uiHelper.mapGetters({
+      consent_review_visible: 'isConsentDialogVisible',
+      privacy_policy_visible: 'isPrivacyPolicyDialogVisible',
+    }),
+    menu_visible: {
+      get() {
+        return this.$store.getters['ui/isMenuVisible'];
+      },
+      set(value) {
+        this.$store.dispatch('ui/setMenuVisibility', value);
+      },
+    },
+  },
   methods: uiHelper.mapActions([
     'toggleMenu',
     'inspectToken',

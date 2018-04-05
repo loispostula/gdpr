@@ -16,12 +16,15 @@ Vue.use(VueLidate);
 Vue.use(VueMaterial);
 
 router.beforeEach((to, from, next) => {
-  console.log(to);
   if (to.meta.authenticated && !store.getters['ui/isAuthenticated']) {
     next('/');
     return;
   }
   next();
+});
+
+router.afterEach(() => {
+  store.dispatch('ui/setMenuVisibility', false);
 });
 
 Vue.config.productionTip = false;

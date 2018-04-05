@@ -60,12 +60,16 @@ export default {
   computed: uiHelper.mapGetters({
     is_authenticated: 'isAuthenticated',
   }),
-  methods: uiHelper.mapActions([
-    'displayConsentDialog',
-    'displayPrivacyPolicyDialog',
-    'logout',
-    'toggleMenu',
-  ]),
+  methods: {
+    ...uiHelper.mapActions([
+      'displayConsentDialog',
+      'displayPrivacyPolicyDialog',
+      'toggleMenu',
+    ]),
+    logout() {
+      this.$store.dispatch('ui/logout').then(() => this.$router.push('/'));
+    },
+  },
 };
 </script>
 

@@ -7,6 +7,10 @@ const toggleMenu = ({ commit }) => {
   commit(types.TOGGLE_MENU);
 };
 
+const setMenuVisibility = ({ commit }, payload) => {
+  commit(types.SET_MENU_VISIBILITY, payload);
+};
+
 const displayConsentDialog = ({ commit }) => {
   commit(types.DISPLAY_CONSENT_DIALOG);
 };
@@ -52,6 +56,11 @@ const inspectToken = ({ dispatch, getters }) => {
   const decoded = jwtDecode(token);
   const exp = decoded.exp;
   const origIat = decoded.orig_iat;
+  const dtFromNow = exp - (Date.now() / 1000);
+  if (dtFromNow < 0) {
+    // we should be logged out
+    dispatch('logout');
+  }
   if (exp - (Date.now() / 1000) < 1800 && (Date.now() / 1000) - origIat < 628200) {
     dispatch('refreshToken');
   }
@@ -64,6 +73,7 @@ const logout = ({ commit }) => {
 
 export default {
   toggleMenu,
+  setMenuVisibility,
   displayConsentDialog,
   hideConsentDialog,
   displayPrivacyPolicyDialog,
