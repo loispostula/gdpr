@@ -1,0 +1,20 @@
+[
+  {
+    "model": "consent.Consent",
+    "pk": 1,
+    "fields": {
+      "key": "logging",
+      "title": "Logging",
+      "description": "Our servers log all incoming requests. We use this information to detect and resolve system errors."
+    }
+  },
+  {
+    "model": "consent.Consent",
+    "pk": 2,
+    "fields": {
+      "key": "authentication",
+      "title": "Authentication",
+      "description": "In order to use our service, we need your full name and your email address."
+    }
+  }
+]

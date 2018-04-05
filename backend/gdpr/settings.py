@@ -13,6 +13,7 @@ import datetime
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -26,6 +27,9 @@ SECRET_KEY = '(q$r=h=#%dz!_d@_8e0elz(^$d6+m$nsf=ldu-t*u7q9lshdz%'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+INTERNAL_IPS = (
+    '127.0.0.1'
+)
 
 
 # Application definition
@@ -44,6 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'base',
     'company',
+    'consent',
 ]
 
 MIDDLEWARE = [

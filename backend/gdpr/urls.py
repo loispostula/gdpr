@@ -19,7 +19,10 @@ from django.contrib import admin
 from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
+from consent.views import ConsentViewSet
+
 router = routers.DefaultRouter()
+router.register(r'consent', ConsentViewSet, base_name='consent')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
