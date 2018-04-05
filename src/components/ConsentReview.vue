@@ -58,6 +58,7 @@ export default {
       'hideConsentDialog',
     ]),
     ...consentsHelper.mapActions([
+      'fetchList',
       'giveConsent',
       'removeConsent',
       'clearValidating',
@@ -65,6 +66,9 @@ export default {
     toggleConsent(consent) {
       return consent.given ? this.removeConsent(consent) : this.giveConsent(consent);
     },
+  },
+  created() {
+    this.fetchList();
   },
   destroyed() {
     this.clearValidating();

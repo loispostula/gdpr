@@ -54,6 +54,7 @@ const inspectToken = ({ dispatch, getters }) => {
   const token = getters.getToken;
   if (!token) return;
   const decoded = jwtDecode(token);
+  console.log(decoded);
   const exp = decoded.exp;
   const origIat = decoded.orig_iat;
   const dtFromNow = exp - (Date.now() / 1000);

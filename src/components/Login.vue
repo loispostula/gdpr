@@ -84,10 +84,9 @@ export default {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         this.sending = true;
-        this.obtainToken({
-          username: this.form.email,
-          password: this.form.password,
-        }).then(() => {
+        this.obtainToken(
+          this.form,
+        ).then(() => {
           this.clearForm();
           this.$router.push('/companies');
           this.sending = false;
