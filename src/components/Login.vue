@@ -85,8 +85,8 @@ export default {
       if (!this.$v.$invalid) {
         this.sending = true;
         this.obtainToken({
-          username: 'lpostula',
-          password: 'yG9VgRlPyK2BMLCotdoqeKOJbHPwD8JKlh7VPAReScT3s1scuq',
+          username: this.form.email,
+          password: this.form.password,
         }).then(() => {
           this.clearForm();
           this.$router.push('/companies');
