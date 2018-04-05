@@ -2,10 +2,10 @@ import axios from 'axios';
 import types from './types';
 import config from '../../../config';
 
-const ENDPOINT = 'consent';
+const API_BASE = `${config.backend_url}/api/consent/`;
 
 const toggleConsent = async (consentKey, value, token) => {
-  const url = `${config.api_base}/${ENDPOINT}/${consentKey}/${value}/`;
+  const url = `${API_BASE}/${consentKey}/${value}/`;
   const r = await axios.post(
     url,
     {},
@@ -48,7 +48,7 @@ const removeConsent = async ({ commit, state, rootGetters }, payload) => {
 
 const fetchList = async ({ commit, rootGetters }) => {
   commit(types.FETCH_LIST_REQUEST);
-  const url = `${config.api_base}/${ENDPOINT}/`;
+  const url = API_BASE;
   const token = rootGetters['ui/getToken'];
   try {
     const r = await axios.get(url, { headers: { Authorization: `JWT ${token}` } });

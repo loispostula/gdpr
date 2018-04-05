@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import config from '../../../config';
 
 import types from './types';
 
@@ -27,34 +28,39 @@ const hidePrivacyPolicyDialog = ({ commit }) => {
   commit(types.HIDE_PRIVACY_POLICY_DIALOG);
 };
 
-const obtainToken = ({ commit, getters }, payload) => axios.post(
-  getters.getEndpoints.obtainJWT, payload,
-).then(
-  (r) => {
+const obtainToken = async ({ commit }, payload) => {
+  try {
+    const r = await axios.post(
+      `${config.backend_url}/auth/obtain_token/`, payload,
+    );
     const token = r.data.token;
     localStorage.setItem('t', token);
     commit(types.SET_TOKEN, token);
-  },
-).catch(e => console.log(e));
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-const refreshToken = ({ commit, getters }) => {
+const refreshToken = async ({ commit, getters }) => {
   const payload = {
     token: getters.getToken,
   };
-  axios.post(getters.getEndpoints.refreshJWT, payload).then(
-    (r) => {
-      const token = r.data.token;
-      localStorage.setItem('t', token);
-      commit(types.SET_TOKEN, token);
-    },
-  ).catch(e => console.log(e));
+  try {
+    const r = await axios.post(
+      `${config.backend_url}/auth/refresh_token/`, payload,
+    );
+    const token = r.data.token;
+    localStorage.setItem('t', token);
+    commit(types.SET_TOKEN, token);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const inspectToken = ({ dispatch, getters }) => {
   const token = getters.getToken;
   if (!token) return;
   const decoded = jwtDecode(token);
-  console.log(decoded);
   const exp = decoded.exp;
   const origIat = decoded.orig_iat;
   const dtFromNow = exp - (Date.now() / 1000);

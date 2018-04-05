@@ -1,3 +1,3 @@
 export default {
-  api_base: process.env.API_BASE,
+  backend_url: process.env.BACKEND_URL,
 };

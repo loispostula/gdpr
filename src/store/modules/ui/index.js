@@ -10,10 +10,6 @@ const state = {
   },
   authentication: {
     jwt: localStorage.getItem('t'),
-    endpoints: {
-      obtainJWT: process.env.JWT_OBTAIN,
-      refreshJWT: process.env.JWT_REFRESH,
-    },
   },
 };
 
