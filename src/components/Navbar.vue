@@ -42,7 +42,7 @@
         <md-icon>person</md-icon>
         <span class="md-list-item-text">Login</span>
       </md-list-item>
-      <md-list-item v-if="!is_authenticated">
+      <md-list-item v-if="!is_authenticated" to="register">
         <md-icon>person_add</md-icon>
         <span class="md-list-item-text">Register</span>
       </md-list-item>

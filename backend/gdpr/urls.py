@@ -20,9 +20,11 @@ from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from consent.views import ConsentViewSet
+from base.views import RegisterViewSet
 
 router = routers.DefaultRouter()
 router.register(r'consent', ConsentViewSet, base_name='consent')
+router.register(r'register', RegisterViewSet, base_name='register')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

@@ -33,6 +33,7 @@
         </md-card-content>
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
         <md-card-actions>
+          <md-button to="/register">Register</md-button>
           <md-button type="submit" class="md-primary" :disabled="sending">Login</md-button>
         </md-card-actions>
       </md-card>
@@ -98,4 +99,7 @@ export default {
 </script>
 
 <style scoped>
+form {
+  justify-content: space-around;
+}
 </style>

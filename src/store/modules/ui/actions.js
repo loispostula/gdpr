@@ -28,6 +28,16 @@ const hidePrivacyPolicyDialog = ({ commit }) => {
   commit(types.HIDE_PRIVACY_POLICY_DIALOG);
 };
 
+const register = async ({ commit }, payload) => {
+  const r = await axios.post(
+    `${config.backend_url}/api/register/`, payload,
+  );
+  const token = r.data.token;
+  localStorage.setItem('t', token);
+  commit(types.SET_TOKEN, token);
+  return r.data;
+};
+
 const obtainToken = async ({ commit }, payload) => {
   try {
     const r = await axios.post(
@@ -85,6 +95,7 @@ export default {
   hideConsentDialog,
   displayPrivacyPolicyDialog,
   hidePrivacyPolicyDialog,
+  register,
   obtainToken,
   refreshToken,
   inspectToken,
