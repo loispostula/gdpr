@@ -16,6 +16,16 @@
         <privacy-policy v-if="privacy_policy_visible" />
       </md-app-content>
     </md-app>
+    <md-snackbar
+      :md-position="'center'"
+      :md-duration="Infinity"
+      :md-active="true"
+      md-persistent
+      v-for="snack in snackbars"
+      v-bind:key="snack.message"
+    >
+      <span>{{ snack.message }}</span>
+    </md-snackbar>
   </div>
 </template>
 
@@ -38,6 +48,7 @@ export default {
     ...uiHelper.mapGetters({
       consent_review_visible: 'isConsentDialogVisible',
       privacy_policy_visible: 'isPrivacyPolicyDialogVisible',
+      snackbars: 'getSnackBar',
     }),
     menu_visible: {
       get() {

@@ -25,4 +25,16 @@ export default {
   [types.REMOVE_TOKEN](state) {
     state.authentication.jwt = null;
   },
+  [types.SB_CREATE](state, snackBar) {
+    state.snackbar.messages = state.snackbar.messages.concat(snackBar);
+  },
+  [types.SB_QUEUE](state, snackBar) {
+    state.snackbar.queued = state.snackbar.queued.concat(snackBar);
+  },
+  [types.SB_REMOVE](state, snackBar) {
+    const index = state.snackbar.messages.findIndex(snack => (
+      snack.message === snackBar.message && snack.timestamp === snackBar.timestamp),
+    );
+    state.snackbar.messages.splice(index, 1);
+  },
 };

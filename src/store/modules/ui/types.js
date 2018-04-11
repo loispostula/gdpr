@@ -10,6 +10,11 @@ const HIDE_PRIVACY_POLICY_DIALOG = 'ui/HIDE_PRIVACY_POLICY_DIALOG';
 const SET_TOKEN = 'ui/SET_TOKEN';
 const REMOVE_TOKEN = 'ui/REMOVE_TOKEN';
 
+const SB_CREATE = 'ui/SB_CREATE';
+const SB_QUEUE = 'ui/SB_QUEUE';
+const SB_REMOVE = 'ui/SB_REMOVE';
+
+
 export default {
   TOGGLE_MENU,
   SET_MENU_VISIBILITY,
@@ -19,4 +24,7 @@ export default {
   HIDE_PRIVACY_POLICY_DIALOG,
   SET_TOKEN,
   REMOVE_TOKEN,
+  SB_CREATE,
+  SB_QUEUE,
+  SB_REMOVE,
 };

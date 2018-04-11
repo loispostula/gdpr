@@ -28,6 +28,8 @@ const hidePrivacyPolicyDialog = ({ commit }) => {
   commit(types.HIDE_PRIVACY_POLICY_DIALOG);
 };
 
+// AUTHENTICATION
+
 const register = async ({ commit }, payload) => {
   const r = await axios.post(
     `${config.backend_url}/api/register/`, payload,
@@ -88,6 +90,42 @@ const logout = ({ commit }) => {
   commit(types.REMOVE_TOKEN);
 };
 
+// SNACKBAR
+// eslint-disable-next-line no-unused-vars
+const addSnackBarAndTimeRemove = ({ commit, dispatch }, snackBar) => {
+  commit(types.SB_CREATE, snackBar);
+  const duration = snackBar.duration || config.snack_bar_duration;
+  setTimeout(() => {
+    dispatch('removeSnackBar', snackBar);
+  }, duration);
+};
+
+const createSnackBar = ({ commit, dispatch, getters }, snackBar) => {
+  const displayed = getters.getSnackBar;
+  const queued = getters.getSnackBarQueued;
+  if (displayed.length < config.max_snack_bar && queued.length === 0) {
+    // we can directly add the snackbar
+    dispatch('addSnackBarAndTimeRemove', snackBar);
+  } else {
+    // we need to enqueue it
+    commit(types.SB_QUEUE, snackBar);
+  }
+};
+
+const removeSnackBar = ({ commit, dispatch, getters }, snackBar) => {
+  // when we remove a snackbar, we need to add the one that are in the queue
+  commit(types.SB_REMOVE, snackBar);
+  const displayed = getters.getSnackBar;
+  const queued = getters.getSnackBarQueued;
+  const needed = Math.min(config.max_snack_bar - displayed.length, queued.length);
+  if (queued.length) {
+    for (let i = 0; i < needed; i += 1) {
+      const snack = queued.shift();
+      dispatch('addSnackBarAndTimeRemove', snack);
+    }
+  }
+};
+
 export default {
   toggleMenu,
   setMenuVisibility,
@@ -100,4 +138,7 @@ export default {
   refreshToken,
   inspectToken,
   logout,
+  createSnackBar,
+  removeSnackBar,
+  addSnackBarAndTimeRemove,
 };

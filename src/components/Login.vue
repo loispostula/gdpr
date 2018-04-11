@@ -44,6 +44,7 @@
 <script>
 import { createNamespacedHelpers } from 'vuex';
 import { required } from 'vuelidate/lib/validators';
+import moment from 'moment';
 
 const uiHelper = createNamespacedHelpers('ui');
 
@@ -69,6 +70,7 @@ export default {
   methods: {
     ...uiHelper.mapActions([
       'obtainToken',
+      'createSnackBar',
     ]),
     clearForm() {
       this.$v.$reset();
@@ -81,17 +83,18 @@ export default {
         'md-invalid': field && field.$invalid && field.$dirty,
       };
     },
-    validateLogin() {
+    async validateLogin() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         this.sending = true;
-        this.obtainToken(
-          this.form,
-        ).then(() => {
-          this.clearForm();
-          this.$router.push('/companies');
-          this.sending = false;
+        await this.obtainToken(this.form);
+        this.createSnackBar({
+          message: 'login successful',
+          timestamp: moment(),
         });
+        this.clearForm();
+        this.$router.push('/companies');
+        this.sending = false;
       }
     },
   },

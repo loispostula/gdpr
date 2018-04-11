@@ -11,6 +11,10 @@ const state = {
   authentication: {
     jwt: localStorage.getItem('t'),
   },
+  snackbar: {
+    queued: [],
+    messages: [],
+  },
 };
 
 export default {
