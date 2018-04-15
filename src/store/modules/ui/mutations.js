@@ -26,15 +26,15 @@ export default {
     state.authentication.jwt = null;
   },
   [types.SB_CREATE](state, snackBar) {
-    state.snackbar.messages = state.snackbar.messages.concat(snackBar);
+    state.snackbar.message = snackBar;
   },
   [types.SB_QUEUE](state, snackBar) {
-    state.snackbar.queued = state.snackbar.queued.concat(snackBar);
+    state.snackbar.queued.push(snackBar);
   },
-  [types.SB_REMOVE](state, snackBar) {
-    const index = state.snackbar.messages.findIndex(snack => (
-      snack.message === snackBar.message && snack.timestamp === snackBar.timestamp),
-    );
-    state.snackbar.messages.splice(index, 1);
+  [types.SB_QUEUE_REMOVE](state) {
+    state.snackbar.queued.splice(0, 1);
+  },
+  [types.SB_REMOVE](state) {
+    state.snackbar.message = null;
   },
 };

@@ -91,8 +91,8 @@ const logout = ({ commit }) => {
 };
 
 // SNACKBAR
-// eslint-disable-next-line no-unused-vars
-const addSnackBarAndTimeRemove = ({ commit, dispatch }, snackBar) => {
+
+const addAndTimeRemoveSnack = ({ commit, dispatch }, snackBar) => {
   commit(types.SB_CREATE, snackBar);
   const duration = snackBar.duration || config.snack_bar_duration;
   setTimeout(() => {
@@ -100,30 +100,27 @@ const addSnackBarAndTimeRemove = ({ commit, dispatch }, snackBar) => {
   }, duration);
 };
 
-const createSnackBar = ({ commit, dispatch, getters }, snackBar) => {
+const createSnackBar = ({ commit, getters, dispatch }, snackBar) => {
   const displayed = getters.getSnackBar;
   const queued = getters.getSnackBarQueued;
-  if (displayed.length < config.max_snack_bar && queued.length === 0) {
-    // we can directly add the snackbar
-    dispatch('addSnackBarAndTimeRemove', snackBar);
+  if (!displayed && queued.length === 0) {
+    dispatch('addAndTimeRemoveSnack', snackBar);
   } else {
-    // we need to enqueue it
     commit(types.SB_QUEUE, snackBar);
   }
 };
 
-const removeSnackBar = ({ commit, dispatch, getters }, snackBar) => {
+const removeSnackBar = ({ commit, getters, dispatch }) => {
   // when we remove a snackbar, we need to add the one that are in the queue
-  commit(types.SB_REMOVE, snackBar);
-  const displayed = getters.getSnackBar;
-  const queued = getters.getSnackBarQueued;
-  const needed = Math.min(config.max_snack_bar - displayed.length, queued.length);
-  if (queued.length) {
-    for (let i = 0; i < needed; i += 1) {
-      const snack = queued.shift();
-      dispatch('addSnackBarAndTimeRemove', snack);
+  commit(types.SB_REMOVE);
+  setTimeout(() => {
+    const queued = getters.getSnackBarQueued;
+    if (queued.length) {
+      const snack = queued[0];
+      commit(types.SB_QUEUE_REMOVE);
+      dispatch('addAndTimeRemoveSnack', snack);
     }
-  }
+  }, 50);
 };
 
 export default {
@@ -140,5 +137,5 @@ export default {
   logout,
   createSnackBar,
   removeSnackBar,
-  addSnackBarAndTimeRemove,
+  addAndTimeRemoveSnack,
 };

@@ -12,6 +12,7 @@ const REMOVE_TOKEN = 'ui/REMOVE_TOKEN';
 
 const SB_CREATE = 'ui/SB_CREATE';
 const SB_QUEUE = 'ui/SB_QUEUE';
+const SB_QUEUE_REMOVE = 'ui/SB_QUEUE_REMOVE';
 const SB_REMOVE = 'ui/SB_REMOVE';
 
 
@@ -26,5 +27,6 @@ export default {
   REMOVE_TOKEN,
   SB_CREATE,
   SB_QUEUE,
+  SB_QUEUE_REMOVE,
   SB_REMOVE,
 };

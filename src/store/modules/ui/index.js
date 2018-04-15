@@ -13,7 +13,7 @@ const state = {
   },
   snackbar: {
     queued: [],
-    messages: [],
+    message: null,
   },
 };
 

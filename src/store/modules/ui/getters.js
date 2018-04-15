@@ -5,7 +5,7 @@ const isPrivacyPolicyDialogVisible = state => state.dialogs.privacy_policy;
 const getToken = state => state.authentication.jwt;
 const isAuthenticated = (state, getters) => !!getters.getToken;
 
-const getSnackBar = state => state.snackbar.messages;
+const getSnackBar = state => state.snackbar.message;
 const getSnackBarQueued = state => state.snackbar.queued;
 
 export default {

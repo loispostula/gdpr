@@ -89,7 +89,7 @@ export default {
         this.sending = true;
         await this.obtainToken(this.form);
         this.createSnackBar({
-          message: 'login successful',
+          message: 'Login successful',
           timestamp: moment(),
         });
         this.clearForm();

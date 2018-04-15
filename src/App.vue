@@ -16,16 +16,7 @@
         <privacy-policy v-if="privacy_policy_visible" />
       </md-app-content>
     </md-app>
-    <md-snackbar
-      :md-position="'center'"
-      :md-duration="Infinity"
-      :md-active="true"
-      md-persistent
-      v-for="snack in snackbars"
-      v-bind:key="snack.message"
-    >
-      <span>{{ snack.message }}</span>
-    </md-snackbar>
+    <snackbar />
   </div>
 </template>
 
@@ -34,6 +25,7 @@ import { createNamespacedHelpers } from 'vuex';
 import Navbar from './components/Navbar';
 import ConsentReview from './components/ConsentReview';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import Snackbar from './components/Snackbar';
 
 const uiHelper = createNamespacedHelpers('ui');
 
@@ -43,12 +35,12 @@ export default {
     Navbar,
     PrivacyPolicy,
     ConsentReview,
+    Snackbar,
   },
   computed: {
     ...uiHelper.mapGetters({
       consent_review_visible: 'isConsentDialogVisible',
       privacy_policy_visible: 'isPrivacyPolicyDialogVisible',
-      snackbars: 'getSnackBar',
     }),
     menu_visible: {
       get() {
