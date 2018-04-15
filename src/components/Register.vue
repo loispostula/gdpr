@@ -132,6 +132,7 @@ export default {
     },
     ...uiHelper.mapActions([
       'register',
+      'createSnackBar',
     ]),
     clearForm() {
       this.$v.$reset();
@@ -152,6 +153,9 @@ export default {
         try {
           await this.register(this.form);
           this.clearForm();
+          this.createSnackBar({
+            message: 'Registration successful, you are now logged in',
+          });
           this.$router.push('/companies');
         } catch (error) {
           const errors = error.response.data;
@@ -168,7 +172,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 form {
   justify-content: space-around;
